@@ -10,14 +10,18 @@
  */
 public class Solution {
     public RandomListNode copyRandomList(RandomListNode head) {
-        if(head==null){
+        if(head==null){// edge case 1
             return  head;
-        }else if(head.next ==null){
+        }else if(head.next ==null){// edge case 2
             RandomListNode copy = new RandomListNode(head.label);
             copy.random = head.random;
             return copy;
         }
         RandomListNode temp = head;
+
+        // 1->2->3->4->5
+        // 1->1'->2->2'->3->3'->4->4'->5-5'
+        // creating copy nodes next to original Ex- 
         while(temp !=null){
             RandomListNode copy = new RandomListNode(temp.label);
             copy.next = temp.next;
@@ -25,6 +29,7 @@ public class Solution {
             temp = temp.next.next;
         }
         temp = head;
+        // createing random node on copy node
         while(temp.next !=null){
             RandomListNode copytemp = temp.next;
             if(temp.random == null){
@@ -37,6 +42,7 @@ public class Solution {
             }
             temp = temp.next.next;
         }
+        // ditaching ths copy nodes and creating new copy
         RandomListNode original = head;
         RandomListNode copyHead = head.next;
         RandomListNode copy = copyHead;
