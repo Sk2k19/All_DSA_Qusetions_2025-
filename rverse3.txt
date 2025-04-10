@@ -1,0 +1,28 @@
+ public int size(ListNode A){
+        int count =0;
+        ListNode temp = A;
+        while(temp!=null){
+            temp = temp.next ;
+            count++;
+        }
+        return count;
+    }
+    public ListNode reverseList(ListNode A, int B) {
+        int len = size(A);
+        if(len/B == len){
+            return A;
+        }
+        ListNode cur=A;
+        ListNode next = null;
+        ListNode prev = null;
+        int count =0;
+        while(cur != null && count<B){
+            next = cur.next ;
+            cur.next = prev;
+            prev = cur;
+            cur = next;
+            count++;
+        }
+        A.next = reverseList(next,B);
+        return prev;
+    }

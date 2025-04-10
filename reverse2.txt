@@ -1,0 +1,53 @@
+ public void reverse(ListNode s){
+        if(s==null || s.next == null){
+            return ;
+        }
+        ListNode h1 = s;
+        ListNode h2 =  s.next;
+        while(h2!=null){
+            ListNode temp = h2.next;
+            h2.next = h1;
+            h1 = h2;
+            h2 = temp;
+        }
+        s.next =null;
+      
+        return ;
+    }
+    
+    public ListNode reverseBetween(ListNode A, int B, int C) {
+       
+        if(A==null | A.next==null){
+            return A;
+        }
+        ListNode first = null;
+        ListNode from = null;
+        ListNode last = null;
+        ListNode To = null;
+        int count =0;
+        ListNode cur = A;
+        while(cur != null){
+            count++;
+            if(count<B){
+                first = cur;
+            }
+            else if(count ==B){
+                from = cur;
+            }
+            if(count == C){
+                To = cur;
+                last = To.next;
+            }
+            cur = cur.next;
+        }
+        To.next = null;
+        reverse(from);
+        if(first !=null){
+            first.next = To;
+        }else{
+            A = To;
+        }
+        from.next = last;
+        return A;
+    
+    }
