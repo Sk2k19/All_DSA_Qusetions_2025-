@@ -1,0 +1,49 @@
+public class Solution {
+    // DO NOT MODIFY THE LIST. IT IS READ ONLY
+    public int leftMostTarget(List<Integer> A, int B){
+        int n = A.size();
+        int s = 0;
+        int e = n-1;
+        while(s<=e){
+            int mid = s+(e-s)/2;
+            if(A.get(mid)==B){
+                if((mid==0 )|| A.get(mid-1)!=B){
+                    return mid;
+                }else{
+                    e = mid-1;
+                }
+            }else if(A.get(mid)<B){
+                s = mid+1;
+            }else {
+                e = mid-1;
+            }
+        }
+        return -1;
+    }
+     public int rightMostTarget(List<Integer> A, int B){
+        int n = A.size();
+        int s = 0;
+        int e = n-1;
+        while(s<=e){
+            int mid = s+(e-s)/2;
+            if(A.get(mid)==B){
+                if((mid==n-1) || B!=A.get(mid+1)){
+                    return mid;
+                }else{
+                    s = mid+1;
+                }
+            }else if(A.get(mid)<B){
+                s = mid+1;
+            }else {
+                e = mid-1;
+            }
+        }
+        return -1;
+    }
+    public ArrayList<Integer> searchRange(final List<Integer> A, int B) {
+        ArrayList<Integer> ans= new ArrayList<>();
+        ans.add(leftMostTarget(A,B));
+        ans.add(rightMostTarget(A,B));
+        return ans;
+    }
+}
