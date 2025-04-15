@@ -1,0 +1,22 @@
+public class Solution {
+    public int[] prevSmaller(int[] A) {
+        int n = A.length;
+        int NSEL[] = new int[n];
+        NSEL[0] = -1;
+        Stack<Integer> st = new Stack<>();
+        st.push(A[0]);
+        for(int i=1;i<n;i++){
+            while( !st.isEmpty() && A[i]<=st.peek()){
+                st.pop();
+            }
+            if(st.isEmpty()){
+                NSEL[i] = -1;
+            }else{
+                NSEL[i] = st.peek();
+            }
+            st.push(A[i]);
+        }
+        return NSEL;
+    }
+
+}
