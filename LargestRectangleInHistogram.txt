@@ -1,0 +1,61 @@
+public class Solution {
+    public int[] NSELeft(int[] A){
+        int n = A.length;
+       int NESL[] = new int[n];
+       NESL[0] = -1;
+       Stack<Integer> st = new Stack<>();
+       st.push(0);
+       for(int i=1;i<n;i++){
+           while(!st.isEmpty() && A[i]<=A[st.peek()]){
+               st.pop();
+           }
+           if(st.isEmpty()){
+               NESL[i] =-1;
+           }else{
+               NESL[i] = st.peek();
+           }
+           st.push(i);
+       }
+       return NESL;
+    }
+    public int[] NSERight(int[] A){
+        int n = A.length;
+       int NESR[] = new int[n];
+       NESR[n-1] = -1;
+       Stack<Integer> st = new Stack<>();
+       st.push(n-1);
+       for(int i=n-2;i>=0 ; i--){
+           while(!st.isEmpty() && A[i]<=A[st.peek()]){
+               st.pop();
+           }
+           if(st.isEmpty()){
+               NESR[i] =-1;
+           }else{
+               NESR[i] = st.peek();
+           }
+           st.push(i);
+       }
+       return NESR;
+    }
+    public int largestRectangleArea(int[] A) {
+        int n = A.length;
+        int ans =0;
+        int[] NSEL = NSELeft(A);
+        int[] NSER = NSERight(A);
+        // for(int num:NSER){
+        //     System.out.print(num+" ");
+        // }
+        for(int i=0;i<n;i++){
+            int s = NSEL[i]+1;
+            int e ;
+            if(NSER[i]<0){
+                e = n-1;
+            }else{
+                e=NSER[i]-1;
+            }
+            int area  = A[i] * (e-s+1);
+            ans = Math.max(ans,area);
+        }
+        return ans;
+    }
+}
