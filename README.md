@@ -58,8 +58,6 @@ DSA-Solutions/ │ ├── Arrays/ ├── LinkedLists/ ├── Trees/ ├
 - LeetCode  
 - GeeksforGeeks  
 - InterviewBit  
-- Striver's SDE Sheet  
-- NeetCode  
 - Scaler Academy Curriculum
 
 ---
