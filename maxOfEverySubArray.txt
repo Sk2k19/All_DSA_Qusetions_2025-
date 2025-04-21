@@ -1,0 +1,37 @@
+public class Solution {
+    // DO NOT MODIFY THE ARGUMENTS WITH "final" PREFIX. IT IS READ ONLY
+    public int[] slidingMaximum(final int[] A, int B) {
+        Deque<Integer> dq = new ArrayDeque<>();
+        for(int j=0;j<B;j++){
+            if(dq.isEmpty()){
+                dq.addLast(j);
+            }else{
+                while(!dq.isEmpty()  && A[dq.getLast()]<A[j]){
+                    dq.pollLast();
+                }  
+                dq.addLast(j);
+                
+            }
+
+        }
+        int n = A.length;
+        int ans[] = new int[n-B+1];
+        ans[0] = A[dq.getFirst()];
+        int i=1;
+        int j=B;
+        while(j<n){
+            while(!dq.isEmpty()  && A[dq.getLast()]<A[j]){
+                    dq.pollLast();
+            }  
+            dq.addLast(j);
+            if(A[dq.getFirst()]==A[i-1]){
+                dq.pollFirst();
+            }
+            ans[i] = A[dq.getFirst()];
+            i++;
+            j++;
+        }
+        return ans;
+
+    }
+}
